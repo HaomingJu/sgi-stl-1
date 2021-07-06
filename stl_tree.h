@@ -193,24 +193,6 @@ inline bool operator!=(const _Rb_tree_base_iterator& __x,
   return __x._M_node != __y._M_node;
 }
 
-#ifndef __STL_CLASS_PARTIAL_SPECIALIZATION
-
-inline bidirectional_iterator_tag
-iterator_category(const _Rb_tree_base_iterator&) {
-  return bidirectional_iterator_tag();
-}
-
-inline _Rb_tree_base_iterator::difference_type*
-distance_type(const _Rb_tree_base_iterator&) {
-  return (_Rb_tree_base_iterator::difference_type*) 0;
-}
-
-template <class _Value, class _Ref, class _Ptr>
-inline _Value* value_type(const _Rb_tree_iterator<_Value, _Ref, _Ptr>&) {
-  return (_Value*) 0;
-}
-
-#endif /* __STL_CLASS_PARTIAL_SPECIALIZATION */
 
 // 全局函数
 // 新节点比为红节点。如果插入处之父节点亦为红节点，就违反红黑树规则，此时必须
@@ -628,17 +610,8 @@ public:
   typedef _Rb_tree_iterator<value_type, const_reference, const_pointer> 
           const_iterator;
 
-#ifdef __STL_CLASS_PARTIAL_SPECIALIZATION
   typedef reverse_iterator<const_iterator> const_reverse_iterator;
   typedef reverse_iterator<iterator> reverse_iterator;
-#else /* __STL_CLASS_PARTIAL_SPECIALIZATION */
-  typedef reverse_bidirectional_iterator<iterator, value_type, reference,
-                                         difference_type>
-          reverse_iterator; 
-  typedef reverse_bidirectional_iterator<const_iterator, value_type,
-                                         const_reference, difference_type>
-          const_reverse_iterator;
-#endif /* __STL_CLASS_PARTIAL_SPECIALIZATION */ 
 
 private:
   iterator _M_insert(_Base_ptr __x, _Base_ptr __y, const value_type& __v);

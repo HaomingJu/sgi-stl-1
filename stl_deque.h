@@ -198,24 +198,6 @@ operator+(ptrdiff_t __n, const _Deque_iterator<_Tp, _Ref, _Ptr>& __x)
   return __x + __n;
 }
 
-#ifndef __STL_CLASS_PARTIAL_SPECIALIZATION
-
-template <class _Tp, class _Ref, class _Ptr>
-inline random_access_iterator_tag
-iterator_category(const _Deque_iterator<_Tp,_Ref,_Ptr>&)
-{
-  return random_access_iterator_tag();
-}
-
-template <class _Tp, class _Ref, class _Ptr>
-inline _Tp* value_type(const _Deque_iterator<_Tp,_Ref,_Ptr>&) { return 0; }
-
-template <class _Tp, class _Ref, class _Ptr>
-inline ptrdiff_t* distance_type(const _Deque_iterator<_Tp,_Ref,_Ptr>&) {
-  return 0;
-}
-
-#endif /* __STL_CLASS_PARTIAL_SPECIALIZATION */
 
 // Deque base class.  It has two purposes.  First, its constructor
 //  and destructor allocate (but don't initialize) storage.  This makes
@@ -443,16 +425,8 @@ public:                         // Iterators
   typedef typename _Base::iterator       iterator;
   typedef typename _Base::const_iterator const_iterator;
 
-#ifdef __STL_CLASS_PARTIAL_SPECIALIZATION
   typedef reverse_iterator<const_iterator> const_reverse_iterator;
   typedef reverse_iterator<iterator> reverse_iterator;
-#else /* __STL_CLASS_PARTIAL_SPECIALIZATION */
-  typedef reverse_iterator<const_iterator, value_type, const_reference, 
-                           difference_type>  
-          const_reverse_iterator;
-  typedef reverse_iterator<iterator, value_type, reference, difference_type>
-          reverse_iterator; 
-#endif /* __STL_CLASS_PARTIAL_SPECIALIZATION */
 
 protected:                      // Internal typedefs
   typedef pointer* _Map_pointer;

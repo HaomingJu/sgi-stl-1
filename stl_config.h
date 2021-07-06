@@ -33,18 +33,13 @@
 #   define __STL_NULL_TMPL_ARGS
 # endif
 
-# if defined(__STL_CLASS_PARTIAL_SPECIALIZATION) \
-     || defined (__STL_PARTIAL_SPECIALIZATION_SYNTAX)
 #   define __STL_TEMPLATE_NULL template<>
-# else
-#   define __STL_TEMPLATE_NULL
-# endif
 
 // Use standard-conforming allocators if we have the necessary language
 // features.  __STL_USE_SGI_ALLOCATORS is a hook so that users can 
 // disable new-style allocators, and continue to use the same kind of
 // allocators as before, without having to edit library headers.
-# if defined(__STL_CLASS_PARTIAL_SPECIALIZATION) && \
+# if \
      defined(__STL_MEMBER_TEMPLATES) && \
      defined(__STL_MEMBER_TEMPLATE_CLASSES) && \
     !defined(__STL_NON_TYPE_TMPL_PARAM_BUG) && \
@@ -116,8 +111,7 @@
 
 #define __STL_VOLATILE
 
-#if defined(__STL_CLASS_PARTIAL_SPECIALIZATION) \
-    && defined(__STL_MEMBER_TEMPLATES) \
+#if defined(__STL_MEMBER_TEMPLATES) \
     && !defined(_STL_NO_CONCEPT_CHECKS)
 #  define __STL_USE_CONCEPT_CHECKS
 #endif

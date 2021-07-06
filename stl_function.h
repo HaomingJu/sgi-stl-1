@@ -582,7 +582,6 @@ private:
   _Ret (_Tp::*_M_f)(_Arg) const;
 };
 
-#ifdef __STL_CLASS_PARTIAL_SPECIALIZATION
 
 template <class _Tp>
 class mem_fun_t<void, _Tp> : public unary_function<_Tp*,void> {
@@ -659,7 +658,6 @@ private:
   void (_Tp::*_M_f)(_Arg) const;
 };
 
-#endif /* __STL_CLASS_PARTIAL_SPECIALIZATION */
 
 // Mem_fun adaptor helper functions.  There are only two:
 //  mem_fun and mem_fun_ref.  (mem_fun1 and mem_fun1_ref 

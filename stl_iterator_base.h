@@ -103,7 +103,6 @@ struct iterator {
 };
 #endif /* __STL_USE_NAMESPACES */
 
-#ifdef __STL_CLASS_PARTIAL_SPECIALIZATION
 
 template <class _Iterator>
 struct iterator_traits {
@@ -178,91 +177,6 @@ value_type(const _Iter& __i) { return __value_type(__i); }
 #define __DISTANCE_TYPE(__i)     __distance_type(__i)
 #define __VALUE_TYPE(__i)        __value_type(__i)
 
-#else /* __STL_CLASS_PARTIAL_SPECIALIZATION */
-
-template <class _Tp, class _Distance> 
-inline input_iterator_tag 
-iterator_category(const input_iterator<_Tp, _Distance>&)
-  { return input_iterator_tag(); }
-
-inline output_iterator_tag iterator_category(const output_iterator&)
-  { return output_iterator_tag(); }
-
-template <class _Tp, class _Distance> 
-inline forward_iterator_tag
-iterator_category(const forward_iterator<_Tp, _Distance>&)
-  { return forward_iterator_tag(); }
-
-template <class _Tp, class _Distance> 
-inline bidirectional_iterator_tag
-iterator_category(const bidirectional_iterator<_Tp, _Distance>&)
-  { return bidirectional_iterator_tag(); }
-
-template <class _Tp, class _Distance> 
-inline random_access_iterator_tag
-iterator_category(const random_access_iterator<_Tp, _Distance>&)
-  { return random_access_iterator_tag(); }
-
-template <class _Tp>
-inline random_access_iterator_tag iterator_category(const _Tp*)
-  { return random_access_iterator_tag(); }
-
-template <class _Tp, class _Distance> 
-inline _Tp* value_type(const input_iterator<_Tp, _Distance>&)
-  { return (_Tp*)(0); }
-
-template <class _Tp, class _Distance> 
-inline _Tp* value_type(const forward_iterator<_Tp, _Distance>&)
-  { return (_Tp*)(0); }
-
-template <class _Tp, class _Distance> 
-inline _Tp* value_type(const bidirectional_iterator<_Tp, _Distance>&)
-  { return (_Tp*)(0); }
-
-template <class _Tp, class _Distance> 
-inline _Tp* value_type(const random_access_iterator<_Tp, _Distance>&)
-  { return (_Tp*)(0); }
-
-template <class _Tp>
-inline _Tp* value_type(const _Tp*) { return (_Tp*)(0); }
-
-template <class _Tp, class _Distance> 
-inline _Distance* distance_type(const input_iterator<_Tp, _Distance>&)
-{
-  return (_Distance*)(0);
-}
-
-template <class _Tp, class _Distance> 
-inline _Distance* distance_type(const forward_iterator<_Tp, _Distance>&)
-{
-  return (_Distance*)(0);
-}
-
-template <class _Tp, class _Distance> 
-inline _Distance* 
-distance_type(const bidirectional_iterator<_Tp, _Distance>&)
-{
-  return (_Distance*)(0);
-}
-
-template <class _Tp, class _Distance> 
-inline _Distance* 
-distance_type(const random_access_iterator<_Tp, _Distance>&)
-{
-  return (_Distance*)(0);
-}
-
-template <class _Tp>
-inline ptrdiff_t* distance_type(const _Tp*) { return (ptrdiff_t*)(0); }
-
-// Without partial specialization we can't use iterator_traits, so
-// we must keep the old iterator query functions around.  
-
-#define __ITERATOR_CATEGORY(__i) iterator_category(__i)
-#define __DISTANCE_TYPE(__i)     distance_type(__i)
-#define __VALUE_TYPE(__i)        value_type(__i)
-
-#endif /* __STL_CLASS_PARTIAL_SPECIALIZATION */
 
 template <class _InputIterator, class _Distance>
 inline void __distance(_InputIterator __first, _InputIterator __last,
@@ -288,7 +202,6 @@ inline void distance(_InputIterator __first,
   __distance(__first, __last, __n, iterator_category(__first));
 }
 
-#ifdef __STL_CLASS_PARTIAL_SPECIALIZATION
 
 template <class _InputIterator>
 inline typename iterator_traits<_InputIterator>::difference_type
@@ -318,7 +231,6 @@ distance(_InputIterator __first, _InputIterator __last) {
   return __distance(__first, __last, _Category());
 }
 
-#endif /* __STL_CLASS_PARTIAL_SPECIALIZATION */
 
 template <class _InputIter, class _Distance>
 inline void __advance(_InputIter& __i, _Distance __n, input_iterator_tag) {

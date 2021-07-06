@@ -272,16 +272,8 @@ public:
   typedef const value_type*                const_iterator;
   typedef value_type*                      iterator;
 
-#ifdef __STL_CLASS_PARTIAL_SPECIALIZATION
   typedef reverse_iterator<const_iterator> const_reverse_iterator;
   typedef reverse_iterator<iterator>       reverse_iterator;
-#else /* __STL_CLASS_PARTIAL_SPECIALIZATION */
-  typedef reverse_iterator<const_iterator, value_type, const_reference, 
-                           difference_type>  
-          const_reverse_iterator;
-  typedef reverse_iterator<iterator, value_type, reference, difference_type>
-          reverse_iterator; 
-#endif /* __STL_PARTIAL_SPECIALIZATION */
 
   static const size_type npos;
 
@@ -2350,7 +2342,6 @@ size_t __stl_string_hash(const basic_string<_CharT,_Traits,_Alloc>& __s) {
   return size_t(__h);
 }
 
-#ifdef __STL_CLASS_PARTIAL_SPECIALIZATION
 
 template <class _CharT, class _Traits, class _Alloc>
 struct hash<basic_string<_CharT,_Traits,_Alloc> > {
@@ -2358,19 +2349,6 @@ struct hash<basic_string<_CharT,_Traits,_Alloc> > {
     { return __stl_string_hash(__s); }
 };
 
-#else
-
-__STL_TEMPLATE_NULL struct hash<string> {
-  size_t operator()(const string& __s) const
-    { return __stl_string_hash(__s); }
-};
-
-__STL_TEMPLATE_NULL struct hash<wstring> {
-  size_t operator()(const wstring& __s) const
-    { return __stl_string_hash(__s); }
-};
-
-#endif /* __STL_CLASS_PARTIAL_SPECIALIZATION */
 
 __STL_END_NAMESPACE
 

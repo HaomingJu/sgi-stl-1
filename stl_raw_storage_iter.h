@@ -61,16 +61,6 @@ public:
   }
 };
 
-#ifndef __STL_CLASS_PARTIAL_SPECIALIZATION
-
-template <class _ForwardIterator, class _Tp>
-inline output_iterator_tag
-iterator_category(const raw_storage_iterator<_ForwardIterator, _Tp>&)
-{
-  return output_iterator_tag();
-}
-
-#endif /* __STL_CLASS_PARTIAL_SPECIALIZATION */
 
 __STL_END_NAMESPACE
 

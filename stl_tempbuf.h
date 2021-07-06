@@ -138,9 +138,7 @@ private:
 
 template <class _ForwardIterator, 
           class _Tp 
-#ifdef __STL_CLASS_PARTIAL_SPECIALIZATION
                     = typename iterator_traits<_ForwardIterator>::value_type
-#endif /* __STL_CLASS_PARTIAL_SPECIALIZATION */
          >
 struct temporary_buffer : public _Temporary_buffer<_ForwardIterator, _Tp>
 {

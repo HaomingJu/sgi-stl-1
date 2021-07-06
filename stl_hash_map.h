@@ -457,7 +457,6 @@ swap(hash_multimap<_Key,_Tp,_HashFcn,_EqlKey,_Alloc>& __hm1,
 // Specialization of insert_iterator so that it will work for hash_map
 // and hash_multimap.
 
-#ifdef __STL_CLASS_PARTIAL_SPECIALIZATION
 
 template <class _Key, class _Tp, class _HashFn,  class _EqKey, class _Alloc>
 class insert_iterator<hash_map<_Key, _Tp, _HashFn, _EqKey, _Alloc> > {
@@ -512,7 +511,6 @@ public:
   insert_iterator<_Container>& operator++(int) { return *this; }
 };
 
-#endif /* __STL_CLASS_PARTIAL_SPECIALIZATION */
 
 
 __STL_END_NAMESPACE

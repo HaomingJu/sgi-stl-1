@@ -439,7 +439,6 @@ swap(hash_multiset<_Val,_HashFcn,_EqualKey,_Alloc>& __hs1,
 // Specialization of insert_iterator so that it will work for hash_set
 // and hash_multiset.
 
-#ifdef __STL_CLASS_PARTIAL_SPECIALIZATION
 
 template <class _Value, class _HashFcn, class _EqualKey, class _Alloc>
 class insert_iterator<hash_set<_Value, _HashFcn, _EqualKey, _Alloc> > {
@@ -494,7 +493,6 @@ public:
   insert_iterator<_Container>& operator++(int) { return *this; }
 };
 
-#endif /* __STL_CLASS_PARTIAL_SPECIALIZATION */
 
 
 __STL_END_NAMESPACE

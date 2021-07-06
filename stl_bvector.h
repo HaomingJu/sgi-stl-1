@@ -349,7 +349,6 @@ protected:
 //  compiler support.  Otherwise, we define a class bit_vector which uses
 //  the default allocator. 
 
-#if defined(__STL_CLASS_PARTIAL_SPECIALIZATION) 
 #  define __SGI_STL_VECBOOL_TEMPLATE
 #  define __BVECTOR           vector<bool, _Alloc>
 #  define __VECTOR            vector
@@ -358,13 +357,6 @@ protected:
    __STL_END_NAMESPACE
 #  include <stl_vector.h>
    __STL_BEGIN_NAMESPACE
-#else  /* __STL_CLASS_PARTIAL_SPECIALIZATION && !__STL_NO_BOOL */
-#  undef  __SGI_STL_VECBOOL_TEMPLATE
-#  define __BVECTOR           bit_vector
-#  define __VECTOR            bit_vector
-#  define __BVECTOR_BASE      _Bvector_base<__STL_DEFAULT_ALLOCATOR(bool) >
-#  define __BVECTOR_TMPL_LIST
-#endif /* __STL_CLASS_PARTIAL_SPECIALIZATION && !__STL_NO_BOOL */
 
 
 __BVECTOR_TMPL_LIST 
@@ -382,15 +374,8 @@ public:
   typedef _Bit_iterator                iterator;
   typedef _Bit_const_iterator          const_iterator;
 
-#ifdef __STL_CLASS_PARTIAL_SPECIALIZATION
   typedef reverse_iterator<const_iterator> const_reverse_iterator;
   typedef reverse_iterator<iterator> reverse_iterator;
-#else /* __STL_CLASS_PARTIAL_SPECIALIZATION */
-  typedef reverse_iterator<const_iterator, value_type, const_reference, 
-                           difference_type> const_reverse_iterator;
-  typedef reverse_iterator<iterator, value_type, reference, difference_type>
-          reverse_iterator;
-#endif /* __STL_CLASS_PARTIAL_SPECIALIZATION */
 
   typedef typename __BVECTOR_BASE::allocator_type allocator_type;
   allocator_type get_allocator() const {

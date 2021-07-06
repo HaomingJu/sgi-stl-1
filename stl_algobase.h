@@ -214,7 +214,7 @@ inline _OutputIter copy(_InputIter __first, _InputIter __last,
 
 // Hack for compilers that don't have partial ordering of function templates
 // but do have partial specialization of class templates.
-#elif defined(__STL_CLASS_PARTIAL_SPECIALIZATION)
+#else
 
 template <class _InputIter, class _OutputIter, class _BoolType>
 struct __copy_dispatch {
@@ -257,42 +257,7 @@ inline _OutputIter copy(_InputIter __first, _InputIter __last,
 // Fallback for compilers with neither partial ordering nor partial
 // specialization.  Define the faster version for the basic builtin
 // types.
-#else /* __STL_CLASS_PARTIAL_SPECIALIZATION */
-
-template <class _InputIter, class _OutputIter>
-inline _OutputIter copy(_InputIter __first, _InputIter __last,
-                        _OutputIter __result)
-{
-  return __copy(__first, __last, __result,
-                __ITERATOR_CATEGORY(__first),
-                __DISTANCE_TYPE(__first));
-}
-
-#define __SGI_STL_DECLARE_COPY_TRIVIAL(_Tp)                                \
-  inline _Tp* copy(const _Tp* __first, const _Tp* __last, _Tp* __result) { \
-    memmove(__result, __first, sizeof(_Tp) * (__last - __first));          \
-    return __result + (__last - __first);                                  \
-  }
-
-__SGI_STL_DECLARE_COPY_TRIVIAL(char)
-__SGI_STL_DECLARE_COPY_TRIVIAL(signed char)
-__SGI_STL_DECLARE_COPY_TRIVIAL(unsigned char)
-__SGI_STL_DECLARE_COPY_TRIVIAL(short)
-__SGI_STL_DECLARE_COPY_TRIVIAL(unsigned short)
-__SGI_STL_DECLARE_COPY_TRIVIAL(int)
-__SGI_STL_DECLARE_COPY_TRIVIAL(unsigned int)
-__SGI_STL_DECLARE_COPY_TRIVIAL(long)
-__SGI_STL_DECLARE_COPY_TRIVIAL(unsigned long)
-#ifdef _STL_LONG_LONG
-__SGI_STL_DECLARE_COPY_TRIVIAL(long long)
-__SGI_STL_DECLARE_COPY_TRIVIAL(unsigned long long)
-#endif 
-__SGI_STL_DECLARE_COPY_TRIVIAL(float)
-__SGI_STL_DECLARE_COPY_TRIVIAL(double)
-__SGI_STL_DECLARE_COPY_TRIVIAL(long double)
-
-#undef __SGI_STL_DECLARE_COPY_TRIVIAL
-#endif /* __STL_CLASS_PARTIAL_SPECIALIZATION */
+#endif
 
 //--------------------------------------------------
 // copy_backward
@@ -322,7 +287,6 @@ inline _BidirectionalIter __copy_backward(_RandomAccessIter __first,
   return __result;
 }
 
-#ifdef __STL_CLASS_PARTIAL_SPECIALIZATION 
 
 // This dispatch class is a workaround for compilers that do not 
 // have partial ordering of function templates.  All we're doing is
@@ -377,16 +341,6 @@ inline _BI2 copy_backward(_BI1 __first, _BI1 __last, _BI2 __result) {
               ::copy(__first, __last, __result);
 }
 
-#else /* __STL_CLASS_PARTIAL_SPECIALIZATION */
-
-template <class _BI1, class _BI2>
-inline _BI2 copy_backward(_BI1 __first, _BI1 __last, _BI2 __result) {
-  return __copy_backward(__first, __last, __result,
-                         __ITERATOR_CATEGORY(__first),
-                         __DISTANCE_TYPE(__first));
-}
-
-#endif /* __STL_CLASS_PARTIAL_SPECIALIZATION */
 
 //--------------------------------------------------
 // copy_n (not part of the C++ standard)

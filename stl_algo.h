@@ -110,7 +110,6 @@ inline _InputIter find_if(_InputIter __first, _InputIter __last,
   return __first;
 }
 
-#ifdef __STL_CLASS_PARTIAL_SPECIALIZATION
 
 template <class _RandomAccessIter, class _Tp>
 _RandomAccessIter find(_RandomAccessIter __first, _RandomAccessIter __last,
@@ -188,7 +187,6 @@ _RandomAccessIter find_if(_RandomAccessIter __first, _RandomAccessIter __last,
   }
 }
 
-#endif /* __STL_CLASS_PARTIAL_SPECIALIZATION */
 
 template <class _InputIter, class _Tp>
 inline _InputIter find(_InputIter __first, _InputIter __last,
@@ -274,7 +272,6 @@ void count_if(_InputIter __first, _InputIter __last, _Predicate __pred,
       ++__n;
 }
 
-#ifdef __STL_CLASS_PARTIAL_SPECIALIZATION
 
 template <class _InputIter, class _Tp>
 typename iterator_traits<_InputIter>::difference_type
@@ -304,7 +301,6 @@ count_if(_InputIter __first, _InputIter __last, _Predicate __pred) {
 }
 
 
-#endif /* __STL_CLASS_PARTIAL_SPECIALIZATION */
 
 // search.
 
@@ -3095,7 +3091,6 @@ _ForwardIter1 __find_end(_ForwardIter1 __first1, _ForwardIter1 __last1,
 }
 
 // find_end for bidirectional iterators.  Requires partial specialization.
-#ifdef __STL_CLASS_PARTIAL_SPECIALIZATION
 
 template <class _BidirectionalIter1, class _BidirectionalIter2>
 _BidirectionalIter1
@@ -3149,7 +3144,6 @@ __find_end(_BidirectionalIter1 __first1, _BidirectionalIter1 __last1,
     return __result;
   }
 }
-#endif /* __STL_CLASS_PARTIAL_SPECIALIZATION */
 
 // Dispatching functions for find_end.
 

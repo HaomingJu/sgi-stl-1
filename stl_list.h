@@ -108,28 +108,6 @@ struct _List_iterator : public _List_iterator_base {
   }
 };
 
-#ifndef __STL_CLASS_PARTIAL_SPECIALIZATION
-
-inline bidirectional_iterator_tag
-iterator_category(const _List_iterator_base&)
-{
-  return bidirectional_iterator_tag();
-}
-
-template <class _Tp, class _Ref, class _Ptr>
-inline _Tp*
-value_type(const _List_iterator<_Tp, _Ref, _Ptr>&)
-{
-  return 0;
-}
-
-inline ptrdiff_t*
-distance_type(const _List_iterator_base&)
-{
-  return 0;
-}
-
-#endif /* __STL_CLASS_PARTIAL_SPECIALIZATION */
 
 
 // Base class that encapsulates details of allocators.  Three cases:
@@ -282,17 +260,8 @@ public:
   typedef _List_iterator<_Tp,_Tp&,_Tp*>             iterator;
   typedef _List_iterator<_Tp,const _Tp&,const _Tp*> const_iterator;
 
-#ifdef __STL_CLASS_PARTIAL_SPECIALIZATION
   typedef reverse_iterator<const_iterator> const_reverse_iterator;
   typedef reverse_iterator<iterator>       reverse_iterator;
-#else /* __STL_CLASS_PARTIAL_SPECIALIZATION */
-  typedef reverse_bidirectional_iterator<const_iterator,value_type,
-                                         const_reference,difference_type>
-          const_reverse_iterator;
-  typedef reverse_bidirectional_iterator<iterator,value_type,reference,
-                                         difference_type>
-          reverse_iterator; 
-#endif /* __STL_CLASS_PARTIAL_SPECIALIZATION */
 
 protected:
 #ifdef __STL_HAS_NAMESPACES

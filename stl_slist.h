@@ -162,22 +162,6 @@ struct _Slist_iterator : public _Slist_iterator_base
   }
 };
 
-#ifndef __STL_CLASS_PARTIAL_SPECIALIZATION
-
-inline ptrdiff_t* distance_type(const _Slist_iterator_base&) {
-  return 0;
-}
-
-inline forward_iterator_tag iterator_category(const _Slist_iterator_base&) {
-  return forward_iterator_tag();
-}
-
-template <class _Tp, class _Ref, class _Ptr> 
-inline _Tp* value_type(const _Slist_iterator<_Tp, _Ref, _Ptr>&) {
-  return 0;
-}
-
-#endif /* __STL_CLASS_PARTIAL_SPECIALIZATION */
 
 // Base class that encapsulates details of allocators.  Three cases:
 // an ordinary standard-conforming allocator, a standard-conforming
@@ -994,7 +978,6 @@ void slist<_Tp,_Alloc>::sort(_StrictWeakOrdering __comp)
 // Specialization of insert_iterator so that insertions will be constant
 // time rather than linear time.
 
-#ifdef __STL_CLASS_PARTIAL_SPECIALIZATION
 
 template <class _Tp, class _Alloc>
 class insert_iterator<slist<_Tp, _Alloc> > {
@@ -1028,7 +1011,6 @@ public:
   insert_iterator<_Container>& operator++(int) { return *this; }
 };
 
-#endif /* __STL_CLASS_PARTIAL_SPECIALIZATION */
 
 
 __STL_END_NAMESPACE 

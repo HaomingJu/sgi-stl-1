@@ -1876,12 +1876,7 @@ class rope : public _Rope_base<_CharT,_Alloc> {
             //  but it's harder to make guarantees.
         }
 
-#     ifdef __STL_CLASS_PARTIAL_SPECIALIZATION
         typedef reverse_iterator<const_iterator> const_reverse_iterator;
-#     else /* __STL_CLASS_PARTIAL_SPECIALIZATION */
-        typedef reverse_iterator<const_iterator, value_type, const_reference,
-                                 difference_type>  const_reverse_iterator;
-#     endif /* __STL_CLASS_PARTIAL_SPECIALIZATION */ 
 
         const_reverse_iterator rbegin() const {
             return const_reverse_iterator(end());
@@ -2297,12 +2292,7 @@ class rope : public _Rope_base<_CharT,_Alloc> {
             return(iterator(this, size()));
         }
 
-#     ifdef __STL_CLASS_PARTIAL_SPECIALIZATION
         typedef reverse_iterator<iterator> reverse_iterator;
-#     else /* __STL_CLASS_PARTIAL_SPECIALIZATION */
-        typedef reverse_iterator<iterator, value_type, reference,
-                                 difference_type>  reverse_iterator;
-#     endif /* __STL_CLASS_PARTIAL_SPECIALIZATION */ 
 
         reverse_iterator mutable_rbegin() {
             return reverse_iterator(mutable_end());
