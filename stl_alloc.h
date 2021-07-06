@@ -90,9 +90,6 @@
 
 __STL_BEGIN_NAMESPACE
 
-#if defined(__sgi) && !defined(__GNUC__) && (_MIPS_SIM != _MIPS_SIM_ABI32)
-#pragma set woff 1174
-#endif
 
 // Malloc-based allocator.  Typically slower than default alloc below.
 // Typically thread-safe and more storage efficient.
@@ -278,12 +275,10 @@ typedef malloc_alloc single_client_alloc;
 // Node that containers built on different allocator instances have
 // different types, limiting the utility of this approach.
 
-#if defined(__SUNPRO_CC) || defined(__GNUC__)
 // breaks if we make these template class members:
   enum {_ALIGN = 8};
   enum {_MAX_BYTES = 128};
   enum {_NFREELISTS = 16}; // _MAX_BYTES/_ALIGN
-#endif
 
 template <bool threads, int inst>
 class __default_alloc_template {
@@ -291,11 +286,6 @@ class __default_alloc_template {
 private:
   // Really we should use static const int x = N
   // instead of enum { x = N }, but few compilers accept the former.
-#if ! (defined(__SUNPRO_CC) || defined(__GNUC__))
-    enum {_ALIGN = 8};
-    enum {_MAX_BYTES = 128};
-    enum {_NFREELISTS = 16}; // _MAX_BYTES/_ALIGN
-# endif
   static size_t
   _S_round_up(size_t __bytes) 
     { return (((__bytes) + (size_t) _ALIGN-1) & ~((size_t) _ALIGN - 1)); }
@@ -306,12 +296,8 @@ __PRIVATE:
         char _M_client_data[1];    /* The client sees this.        */
   };
 private:
-# if defined(__SUNPRO_CC) || defined(__GNUC__) || defined(__HP_aCC)
     static _Obj* __STL_VOLATILE _S_free_list[]; 
         // Specifying a size results in duplicate def for 4.1
-# else
-    static _Obj* __STL_VOLATILE _S_free_list[_NFREELISTS]; 
-# endif
   static  size_t _S_freelist_index(size_t __bytes) {
         return (((__bytes) + (size_t)_ALIGN-1)/(size_t)_ALIGN - 1);
   }
@@ -563,11 +549,7 @@ size_t __default_alloc_template<__threads, __inst>::_S_heap_size = 0;
 template <bool __threads, int __inst>
 typename __default_alloc_template<__threads, __inst>::_Obj* __STL_VOLATILE
 __default_alloc_template<__threads, __inst> ::_S_free_list[
-# if defined(__SUNPRO_CC) || defined(__GNUC__) || defined(__HP_aCC)
     _NFREELISTS
-# else
-    __default_alloc_template<__threads, __inst>::_NFREELISTS
-# endif
 ] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, };
 // The 16 zeros are necessary to make version 4.1 of the SunPro
 // compiler happy.  Otherwise it appears to allocate too little
@@ -882,9 +864,6 @@ struct _Alloc_traits<_Tp, __allocator<_Tp1, debug_alloc<_Alloc> > >
 
 #endif /* __STL_USE_STD_ALLOCATORS */
 
-#if defined(__sgi) && !defined(__GNUC__) && (_MIPS_SIM != _MIPS_SIM_ABI32)
-#pragma reset woff 1174
-#endif
 
 __STL_END_NAMESPACE
 

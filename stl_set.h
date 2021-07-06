@@ -35,10 +35,6 @@
 
 __STL_BEGIN_NAMESPACE
 
-#if defined(__sgi) && !defined(__GNUC__) && (_MIPS_SIM != _MIPS_SIM_ABI32)
-#pragma set woff 1174
-#pragma set woff 1375
-#endif
 
 // Forward declarations of operators < and ==, needed for friend declaration.
 
@@ -255,10 +251,6 @@ inline void swap(set<_Key,_Compare,_Alloc>& __x,
 
 #endif /* __STL_FUNCTION_TMPL_PARTIAL_ORDER */
 
-#if defined(__sgi) && !defined(__GNUC__) && (_MIPS_SIM != _MIPS_SIM_ABI32)
-#pragma reset woff 1174
-#pragma reset woff 1375
-#endif
 
 __STL_END_NAMESPACE
 

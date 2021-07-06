@@ -35,10 +35,6 @@ __STL_BEGIN_NAMESPACE
 
 static const int __WORD_BIT = int(CHAR_BIT*sizeof(unsigned int));
 
-#if defined(__sgi) && !defined(__GNUC__) && (_MIPS_SIM != _MIPS_SIM_ABI32)
-#pragma set woff 1174
-#pragma set woff 1375
-#endif
 
 struct _Bit_reference {
   unsigned int* _M_p;
@@ -882,10 +878,6 @@ inline bool operator>=(const bit_vector& __x, const bit_vector& __y)
 #undef __BVECTOR_BASE
 #undef __BVECTOR_TMPL_LIST 
 
-#if defined(__sgi) && !defined(__GNUC__) && (_MIPS_SIM != _MIPS_SIM_ABI32)
-#pragma reset woff 1174
-#pragma reset woff 1375
-#endif
 
 __STL_END_NAMESPACE 
 

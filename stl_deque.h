@@ -69,10 +69,6 @@
 
 __STL_BEGIN_NAMESPACE 
 
-#if defined(__sgi) && !defined(__GNUC__) && (_MIPS_SIM != _MIPS_SIM_ABI32)
-#pragma set woff 1174
-#pragma set woff 1375
-#endif
 
 // Note: this function is simply a kludge to work around several compilers'
 //  bugs in handling constant expressions.
@@ -1638,10 +1634,6 @@ inline void swap(deque<_Tp,_Alloc>& __x, deque<_Tp,_Alloc>& __y) {
 
 #endif /* __STL_FUNCTION_TMPL_PARTIAL_ORDER */
 
-#if defined(__sgi) && !defined(__GNUC__) && (_MIPS_SIM != _MIPS_SIM_ABI32)
-#pragma reset woff 1174
-#pragma reset woff 1375
-#endif
           
 __STL_END_NAMESPACE 
   

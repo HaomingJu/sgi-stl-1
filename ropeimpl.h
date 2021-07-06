@@ -29,9 +29,6 @@
 
 __STL_BEGIN_NAMESPACE
 
-#if defined(__sgi) && !defined(__GNUC__) && (_MIPS_SIM != _MIPS_SIM_ABI32)
-#pragma set woff 1174
-#endif
 
 // Set buf_start, buf_end, and buf_ptr appropriately, filling tmp_buf
 // if necessary.  Assumes _M_path_end[leaf_index] and leaf_pos are correct.
@@ -1550,14 +1547,6 @@ _Rope_rotate(_Rope_iterator __first,
   __r += __suffix;
 }
 
-#if !defined(__GNUC__)
-// Appears to confuse g++
-inline void rotate(_Rope_iterator<char,__STL_DEFAULT_ALLOCATOR(char)> __first,
-                   _Rope_iterator<char,__STL_DEFAULT_ALLOCATOR(char)> __middle,
-                   _Rope_iterator<char,__STL_DEFAULT_ALLOCATOR(char)> __last) {
-    _Rope_rotate(__first, __middle, __last);
-}
-#endif
 
 # if 0
 // Probably not useful for several reasons:
@@ -1576,9 +1565,6 @@ inline void rotate(
 # endif
 
 
-#if defined(__sgi) && !defined(__GNUC__) && (_MIPS_SIM != _MIPS_SIM_ABI32)
-#pragma reset woff 1174
-#endif
 
 __STL_END_NAMESPACE
 

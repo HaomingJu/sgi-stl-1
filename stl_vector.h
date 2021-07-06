@@ -35,10 +35,6 @@
 
 __STL_BEGIN_NAMESPACE 
 
-#if defined(__sgi) && !defined(__GNUC__) && (_MIPS_SIM != _MIPS_SIM_ABI32)
-#pragma set woff 1174
-#pragma set woff 1375
-#endif
 
 // The vector base class serves two purposes.  First, its constructor
 // and destructor allocate (but don't initialize) storage.  This makes
@@ -858,10 +854,6 @@ vector<_Tp, _Alloc>::insert(iterator __position,
 
 #endif /* __STL_MEMBER_TEMPLATES */
 
-#if defined(__sgi) && !defined(__GNUC__) && (_MIPS_SIM != _MIPS_SIM_ABI32)
-#pragma reset woff 1174
-#pragma reset woff 1375
-#endif
 
 __STL_END_NAMESPACE 
 

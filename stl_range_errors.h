@@ -32,18 +32,7 @@
 
 // For the SGI 7.3 compiler, declare these functions here and define them
 // elsewhere.
-#if defined(__STL_THROW_RANGE_ERRORS) && \
-    defined(__sgi) && !defined(__GNUC__) && \
-    _COMPILER_VERSION >= 730 && defined(_STANDARD_C_PLUS_PLUS)
-
-__STL_BEGIN_NAMESPACE
-void __stl_throw_range_error(const char* __msg);
-void __stl_throw_length_error(const char* __msg);
-__STL_END_NAMESPACE
-
-// For other compilers where we're throwing range errors, include the
-// stdexcept header and throw the appropriate exceptions directly.
-#elif defined(__STL_THROW_RANGE_ERRORS)
+#if   defined(__STL_THROW_RANGE_ERRORS)
 
 #include <stdexcept>
 

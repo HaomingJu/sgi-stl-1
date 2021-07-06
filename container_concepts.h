@@ -212,9 +212,7 @@ _const_ReversibleContainer_requirement_violation(_ReversibleContainer __c) {
   typedef typename _ReversibleContainer::const_iterator const_iter;
   
   // This line won't compile on gcc 2.91 due to a compiler bug.
-#if !(__GNUC__ == 2 && __GNUC_MINOR__ == 91)
   __BidirectionalIterator_concept_specification<const_iter>::_BidirectionalIterator_requirement_violation(const_iter());
-#endif
 }
 };
 

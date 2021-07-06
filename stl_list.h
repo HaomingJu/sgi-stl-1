@@ -35,10 +35,6 @@
 
 __STL_BEGIN_NAMESPACE
 
-#if defined(__sgi) && !defined(__GNUC__) && (_MIPS_SIM != _MIPS_SIM_ABI32)
-#pragma set woff 1174
-#pragma set woff 1375
-#endif
 
 struct _List_node_base {
   _List_node_base* _M_next;
@@ -871,10 +867,6 @@ void list<_Tp, _Alloc>::sort(_StrictWeakOrdering __comp)
 
 #endif /* __STL_MEMBER_TEMPLATES */
 
-#if defined(__sgi) && !defined(__GNUC__) && (_MIPS_SIM != _MIPS_SIM_ABI32)
-#pragma reset woff 1174
-#pragma reset woff 1375
-#endif
 
 __STL_END_NAMESPACE 
 

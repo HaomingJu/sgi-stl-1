@@ -1,0 +1,27 @@
+g++ -E -P -dD stl_config.h
+
+#define __STL_CONFIG_H
+#define __STL_DEFAULT_CONSTRUCTOR_BUG
+#define __STL_USE_EXCEPTIONS
+#define __STL_DEPENDENT_DEFAULT_TMPL(_Tp) = _Tp
+#define __STL_TEMPLATE
+#define __STL_NULL_TMPL_ARGS
+#define __STL_TEMPLATE_NULL
+#define __STL_DEFAULT_ALLOCATOR(T) alloc
+#define __STD
+#define __STL_BEGIN_NAMESPACE
+#define __STL_END_NAMESPACE
+#undef __STL_USE_NAMESPACE_FOR_RELOPS
+#define __STL_BEGIN_RELOPS_NAMESPACE
+#define __STL_END_RELOPS_NAMESPACE
+#define __STD_RELOPS
+#undef __STL_USE_NAMESPACES
+#define __STD_QUALIFIER
+#define __STL_TRY try
+#define __STL_CATCH_ALL catch(...)
+#define __STL_THROW(x) throw x
+#define __STL_RETHROW throw
+#define __STL_NOTHROW throw()
+#define __STL_UNWIND(action) catch(...) { action; throw; }
+#define __stl_assert(expr)
+#define __STL_VOLATILE

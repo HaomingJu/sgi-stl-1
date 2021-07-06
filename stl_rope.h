@@ -36,9 +36,6 @@
 
 __STL_BEGIN_NAMESPACE
 
-#if defined(__sgi) && !defined(__GNUC__) && (_MIPS_SIM != _MIPS_SIM_ABI32)
-#pragma set woff 1174
-#endif
 
 // The _S_eos function is used for those functions that
 // convert to/from C-like strings to detect the end of the string.
@@ -98,10 +95,6 @@ class char_producer {
 // little like containers.
 
 template<class _Sequence, size_t _Buf_sz = 100
-#   if defined(__sgi) && !defined(__GNUC__)
-#        define __TYPEDEF_WORKAROUND
-         ,class _V = typename _Sequence::value_type
-#   endif
         >
 // The 3rd parameter works around a common compiler bug.
 class sequence_buffer : public output_iterator {
@@ -886,9 +879,6 @@ class _Rope_char_ptr_proxy {
 // Iterators are assumed to be thread private.  Ropes can
 // be shared.
 
-#if defined(__sgi) && !defined(__GNUC__) && (_MIPS_SIM != _MIPS_SIM_ABI32)
-#pragma set woff 1375
-#endif
 
 template<class _CharT, class _Alloc>
 class _Rope_iterator_base
@@ -1248,9 +1238,6 @@ class _Rope_iterator : public _Rope_iterator_base<_CharT,_Alloc> {
 #endif
 };
 
-#if defined(__sgi) && !defined(__GNUC__) && (_MIPS_SIM != _MIPS_SIM_ABI32)
-#pragma reset woff 1375
-#endif
 
 //  The rope base class encapsulates
 //  the differences between SGI-style allocators and standard-conforming
@@ -2699,9 +2686,6 @@ __STL_TEMPLATE_NULL struct hash<wrope>
   }
 };
 
-#if defined(__sgi) && !defined(__GNUC__) && (_MIPS_SIM != _MIPS_SIM_ABI32)
-#pragma reset woff 1174
-#endif
 
 __STL_END_NAMESPACE
 

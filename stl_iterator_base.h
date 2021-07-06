@@ -325,9 +325,6 @@ inline void __advance(_InputIter& __i, _Distance __n, input_iterator_tag) {
   while (__n--) ++__i;
 }
 
-#if defined(__sgi) && !defined(__GNUC__) && (_MIPS_SIM != _MIPS_SIM_ABI32)
-#pragma set woff 1183
-#endif
 
 template <class _BidirectionalIterator, class _Distance>
 inline void __advance(_BidirectionalIterator& __i, _Distance __n, 
@@ -339,9 +336,6 @@ inline void __advance(_BidirectionalIterator& __i, _Distance __n,
     while (__n++) --__i;
 }
 
-#if defined(__sgi) && !defined(__GNUC__) && (_MIPS_SIM != _MIPS_SIM_ABI32)
-#pragma reset woff 1183
-#endif
 
 template <class _RandomAccessIterator, class _Distance>
 inline void __advance(_RandomAccessIterator& __i, _Distance __n, 

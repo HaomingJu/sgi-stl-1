@@ -60,9 +60,6 @@ iterators invalidated are those referring to the deleted node.
 
 __STL_BEGIN_NAMESPACE 
 
-#if defined(__sgi) && !defined(__GNUC__) && (_MIPS_SIM != _MIPS_SIM_ABI32)
-#pragma set woff 1375
-#endif
 
 typedef bool _Rb_tree_Color_type;
 const _Rb_tree_Color_type _S_rb_tree_red = false;
@@ -1377,9 +1374,6 @@ struct rb_tree : public _Rb_tree<_Key, _Value, _KeyOfValue, _Compare, _Alloc>
   ~rb_tree() {}
 };
 
-#if defined(__sgi) && !defined(__GNUC__) && (_MIPS_SIM != _MIPS_SIM_ABI32)
-#pragma reset woff 1375
-#endif
 
 __STL_END_NAMESPACE 
 

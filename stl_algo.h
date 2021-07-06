@@ -39,9 +39,6 @@
 
 __STL_BEGIN_NAMESPACE
 
-#if defined(__sgi) && !defined(__GNUC__) && (_MIPS_SIM != _MIPS_SIM_ABI32)
-#pragma set woff 1209
-#endif
 
 // __median (an extension, not present in the C++ standard).
 
@@ -3284,9 +3281,6 @@ bool is_sorted(_ForwardIter __first, _ForwardIter __last,
   return true;
 }
 
-#if defined(__sgi) && !defined(__GNUC__) && (_MIPS_SIM != _MIPS_SIM_ABI32)
-#pragma reset woff 1209
-#endif
 
 __STL_END_NAMESPACE
 

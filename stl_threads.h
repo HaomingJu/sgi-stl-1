@@ -298,7 +298,7 @@ struct _STL_mutex_lock
   }
   void _M_release_lock() {
     volatile unsigned long* __lock = &_M_lock;
-#   if defined(__STL_SGI_THREADS) && defined(__GNUC__) && __mips >= 3
+#   if defined(__STL_SGI_THREADS) && __mips >= 3
         asm("sync");
         *__lock = 0;
 #   elif defined(__STL_SGI_THREADS) && __mips >= 3 \

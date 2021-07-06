@@ -47,9 +47,6 @@
 
 __STL_BEGIN_NAMESPACE
 
-#if defined(__sgi) && !defined(__GNUC__) && (_MIPS_SIM != _MIPS_SIM_ABI32)
-#pragma set woff 1209
-#endif
 
 // structure to aid in counting bits
 template<bool __dummy> 
@@ -1055,9 +1052,6 @@ unsigned char _First_one<__dummy>::_S_first_one[] = {
   0, /* 255 */
 }; // end _First_one
 
-#if defined(__sgi) && !defined(__GNUC__) && (_MIPS_SIM != _MIPS_SIM_ABI32)
-#pragma reset woff 1209
-#endif
 
 __STL_END_NAMESPACE
 
