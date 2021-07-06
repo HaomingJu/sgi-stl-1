@@ -183,7 +183,6 @@ inline _OutputIter __copy_aux2(_InputIter __first, _InputIter __last,
                 __DISTANCE_TYPE(__first));
 }
 
-#ifndef __USLC__
 
 template <class _Tp>
 inline _Tp* __copy_aux2(_Tp* __first, _Tp* __last, _Tp* __result,
@@ -191,7 +190,6 @@ inline _Tp* __copy_aux2(_Tp* __first, _Tp* __last, _Tp* __result,
   return __copy_trivial(__first, __last, __result);
 }
 
-#endif /* __USLC__ */
 
 template <class _Tp>
 inline _Tp* __copy_aux2(const _Tp* __first, const _Tp* __last, _Tp* __result,

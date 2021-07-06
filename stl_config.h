@@ -13,30 +13,6 @@
 
 
 
-/*
- * Jochen Schlick '1999  - added new #defines (__STL)_UITHREADS (for 
- *                         providing SCO / Solaris / UI thread support)
- *                       - added the necessary defines for the SCO UDK 7 
- *                         compiler (and its template friend behavior)
- *                       - all UDK7 specific STL changes are based on the 
- *                         macro __USLC__ being defined
- */
-// SCO UDK 7 compiler (UnixWare 7x, OSR 5, UnixWare 2x)
-# if defined(__USLC__)
-#     define __STL_HAS_WCHAR_T 
-#     define __STL_CLASS_PARTIAL_SPECIALIZATION
-#     define __STL_PARTIAL_SPECIALIZATION_SYNTAX
-#     define __STL_FUNCTION_TMPL_PARTIAL_ORDER
-#     define __STL_MEMBER_TEMPLATES
-#     define __STL_MEMBER_TEMPLATE_CLASSES
-#     define __STL_HAS_NAMESPACES
-#     define __STL_USE_NAMESPACES
-#     define __STL_LONG_LONG
-#     if defined(_REENTRANT)
-#           define _UITHREADS     /* if      UnixWare < 7.0.1 */
-#           define __STL_UITHREADS
-#     endif
-# endif
 
 
 

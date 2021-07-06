@@ -2216,21 +2216,6 @@ istream& operator>>(istream& __is, basic_string<_CharT,_Traits,_Alloc>& __s)
   streambuf* __buf = __is.rdbuf();
   if (__buf) {
 
-#ifdef __USLC__
-/* Jochen Schlick '1999  - operator >> modified. Work-around to get the 
- *                         output buffer flushed (necessary when using 
- *                         "cout" (without endl or flushing) followed by
- *                         "cin >>" ...)
- */
-    if (__is.flags() & ios::skipws) {
-      _CharT __c;
-      do 
-         __is.get(__c);
-      while (__is && isspace(__c));
-      if (__is)
-         __is.putback(__c);
-    }
-#else
     if (__is.flags() & ios::skipws) {
       int __c;
       do {
@@ -2246,7 +2231,6 @@ istream& operator>>(istream& __is, basic_string<_CharT,_Traits,_Alloc>& __s)
           __is.clear(__is.rdstate() | ios::failbit);
       }
     }
-#endif
 
     // If we arrive at end of file (or fail for some other reason) while
     // still discarding whitespace, then we don't try to read the string.
