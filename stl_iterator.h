@@ -157,13 +157,8 @@ insert_iterator<_Container> inserter(_Container& __x, _Iterator __i)
   return insert_iterator<_Container>(__x, __iter(__i));
 }
 
-#ifndef __STL_LIMITED_DEFAULT_TEMPLATES
 template <class _BidirectionalIterator, class _Tp, class _Reference = _Tp&, 
           class _Distance = ptrdiff_t> 
-#else
-template <class _BidirectionalIterator, class _Tp, class _Reference, 
-          class _Distance> 
-#endif
 class reverse_bidirectional_iterator {
   typedef reverse_bidirectional_iterator<_BidirectionalIterator, _Tp, 
                                          _Reference, _Distance>  _Self;
@@ -404,13 +399,8 @@ operator+(typename reverse_iterator<_Iterator>::difference_type __n,
 // This is the old version of reverse_iterator, as found in the original
 //  HP STL.  It does not use partial specialization.
 
-#ifndef __STL_LIMITED_DEFAULT_TEMPLATES
 template <class _RandomAccessIterator, class _Tp, class _Reference = _Tp&,
           class _Distance = ptrdiff_t> 
-#else
-template <class _RandomAccessIterator, class _Tp, class _Reference,
-          class _Distance> 
-#endif
 class reverse_iterator {
   typedef reverse_iterator<_RandomAccessIterator, _Tp, _Reference, _Distance>
         _Self;

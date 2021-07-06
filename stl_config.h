@@ -1,6 +1,6 @@
 
 #ifndef __STL_CONFIG_H
-# define __STL_CONFIG_H
+#define __STL_CONFIG_H
 
 
 # if defined(_PTHREADS) && !defined(_NOTHREADS)
@@ -19,11 +19,7 @@
 #   endif
 
 
-# ifdef __STL_LIMITED_DEFAULT_TEMPLATES
-#   define __STL_DEPENDENT_DEFAULT_TMPL(_Tp)
-# else
-#   define __STL_DEPENDENT_DEFAULT_TMPL(_Tp) = _Tp
-# endif
+#define __STL_DEPENDENT_DEFAULT_TMPL(_Tp) = _Tp
 
 # ifdef __STL_MEMBER_TEMPLATE_KEYWORD
 #   define __STL_TEMPLATE template
@@ -53,7 +49,6 @@
      defined(__STL_MEMBER_TEMPLATES) && \
      defined(__STL_MEMBER_TEMPLATE_CLASSES) && \
     !defined(__STL_NON_TYPE_TMPL_PARAM_BUG) && \
-    !defined(__STL_LIMITED_DEFAULT_TEMPLATES) && \
     !defined(__STL_USE_SGI_ALLOCATORS) 
 #   define __STL_USE_STD_ALLOCATORS
 # endif
