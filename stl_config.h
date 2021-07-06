@@ -18,49 +18,6 @@
 #     define __STL_PTHREADS
 #   endif
 
-
-# if defined(__COMO__)
-#   define __STL_MEMBER_TEMPLATES
-#   define __STL_MEMBER_TEMPLATE_CLASSES
-#   define __STL_TEMPLATE_FRIENDS
-#   define __STL_CLASS_PARTIAL_SPECIALIZATION
-#   define __STL_HAS_NAMESPACES
-# endif
-
-// Intel compiler, which uses the EDG front end.
-# if defined(__ICL)
-#   define __STL_LONG_LONG 
-#   define __STL_MEMBER_TEMPLATES
-#   define __STL_MEMBER_TEMPLATE_CLASSES
-#   define __STL_TEMPLATE_FRIENDS
-#   define __STL_FUNCTION_TMPL_PARTIAL_ORDER
-#   define __STL_CLASS_PARTIAL_SPECIALIZATION
-#   define __STL_NO_DRAND48
-#   define __STL_HAS_NAMESPACES
-#   define __STL_MEMBER_TEMPLATE_KEYWORD
-#   ifdef _CPPUNWIND
-#   endif
-#   ifdef _MT
-#     define __STL_WIN32THREADS
-#   endif
-# endif
-
-// Mingw32, egcs compiler using the Microsoft C runtime
-# if defined(__MINGW32__)
-#   define __STL_NO_DRAND48
-#   ifdef _MT
-#     define __STL_WIN32THREADS
-#   endif
-# endif
-
-// Cygwin32, egcs compiler on MS Windows
-# if defined(__CYGWIN__)
-#   define __STL_NO_DRAND48
-# endif
-
-
-
-
 # if defined(__BORLANDC__)
 #     define __STL_NO_BAD_ALLOC
 #     define __STL_NO_DRAND48
@@ -84,11 +41,6 @@
 #   endif
 # endif
 
-
-# ifdef __STL_NEED_TYPENAME
-#   define typename
-# endif
-
 # ifdef __STL_LIMITED_DEFAULT_TEMPLATES
 #   define __STL_DEPENDENT_DEFAULT_TMPL(_Tp)
 # else
@@ -101,9 +53,6 @@
 #   define __STL_TEMPLATE
 # endif
 
-# ifdef __STL_NEED_EXPLICIT
-#   define explicit
-# endif
 
 # ifdef __STL_EXPLICIT_FUNCTION_TMPL_ARGS
 #   define __STL_NULL_TMPL_ARGS <>
@@ -191,22 +140,9 @@
 #   define __STL_NOTHROW throw()
 #   define __STL_UNWIND(action) catch(...) { action; throw; }
 
-#ifdef __STL_ASSERTIONS
-# include <stdio.h>
-# define __stl_assert(expr) \
-    if (!(expr)) { fprintf(stderr, "%s:%d STL assertion failure: %s\n", \
-			  __FILE__, __LINE__, # expr); abort(); }
-#else
-# define __stl_assert(expr)
-#endif
+#define __stl_assert(expr)
 
-#if defined(__STL_WIN32THREADS) || defined(__STL_SGI_THREADS) \
-    || defined(__STL_PTHREADS)  || defined(__STL_UITHREADS)
-#   define __STL_THREADS
-#   define __STL_VOLATILE volatile
-#else
-#   define __STL_VOLATILE
-#endif
+#define __STL_VOLATILE
 
 #if defined(__STL_CLASS_PARTIAL_SPECIALIZATION) \
     && defined(__STL_MEMBER_TEMPLATES) \
