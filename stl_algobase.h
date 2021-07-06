@@ -97,7 +97,6 @@ inline void swap(_Tp& __a, _Tp& __b) {
 //--------------------------------------------------
 // min and max
 
-#if !defined(__BORLANDC__) || __BORLANDC__ >= 0x540 /* C++ Builder 4.0 */
 
 #undef min
 #undef max
@@ -114,7 +113,6 @@ inline const _Tp& max(const _Tp& __a, const _Tp& __b) {
   return  __a < __b ? __b : __a;
 }
 
-#endif /* __BORLANDC__ */
 
 template <class _Tp, class _Compare>
 inline const _Tp& min(const _Tp& __a, const _Tp& __b, _Compare __comp) {

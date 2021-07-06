@@ -18,28 +18,6 @@
 #     define __STL_PTHREADS
 #   endif
 
-# if defined(__BORLANDC__)
-#     define __STL_NO_BAD_ALLOC
-#     define __STL_NO_DRAND48
-#     define __STL_DEFAULT_CONSTRUCTOR_BUG
-#   if __BORLANDC__ >= 0x540 /* C++ Builder 4.0 */
-#     define __STL_CLASS_PARTIAL_SPECIALIZATION
-#     define __STL_FUNCTION_TMPL_PARTIAL_ORDER
-#     define __STL_EXPLICIT_FUNCTION_TMPL_ARGS
-#     define __STL_MEMBER_TEMPLATES
-#     define __STL_TEMPLATE_FRIENDS
-#   else
-#     define __STL_NEED_TYPENAME
-#     define __STL_LIMITED_DEFAULT_TEMPLATES
-#     define __SGI_STL_NO_ARROW_OPERATOR
-#     define __STL_NON_TYPE_TMPL_PARAM_BUG
-#   endif
-#   ifdef _CPPUNWIND
-#   endif
-#   ifdef __MT__
-#     define __STL_WIN32THREADS
-#   endif
-# endif
 
 # ifdef __STL_LIMITED_DEFAULT_TEMPLATES
 #   define __STL_DEPENDENT_DEFAULT_TMPL(_Tp)
