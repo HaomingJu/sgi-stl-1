@@ -332,7 +332,6 @@ class numeric_limits<unsigned long>
   : public _Integer_limits<unsigned long, 0, ULONG_MAX>
 {};
 
-#ifdef __STL_LONG_LONG
 
 // Some compilers have long long, but don't define the
 // LONGLONG_MIN and LONGLONG_MAX macros in limits.h.  This
@@ -356,7 +355,6 @@ class numeric_limits<unsigned long long>
   : public _Integer_limits<unsigned long long, 0, ULONGLONG_MAX>
 {};
 
-#endif /* __STL_LONG_LONG */
 
 // Specializations for all built-in floating-point type.
 
