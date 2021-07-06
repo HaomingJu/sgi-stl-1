@@ -125,17 +125,6 @@ __STL_TEMPLATE_NULL struct __type_traits<unsigned char> {
    typedef __true_type    is_POD_type;
 };
 
-#ifdef __STL_HAS_WCHAR_T
-
-__STL_TEMPLATE_NULL struct __type_traits<wchar_t> {
-   typedef __true_type    has_trivial_default_constructor;
-   typedef __true_type    has_trivial_copy_constructor;
-   typedef __true_type    has_trivial_assignment_operator;
-   typedef __true_type    has_trivial_destructor;
-   typedef __true_type    is_POD_type;
-};
-
-#endif /* __STL_HAS_WCHAR_T */
 
 __STL_TEMPLATE_NULL struct __type_traits<short> {
    typedef __true_type    has_trivial_default_constructor;
@@ -318,13 +307,6 @@ __STL_TEMPLATE_NULL struct _Is_integer<unsigned char> {
   typedef __true_type _Integral;
 };
 
-#ifdef __STL_HAS_WCHAR_T
-
-__STL_TEMPLATE_NULL struct _Is_integer<wchar_t> {
-  typedef __true_type _Integral;
-};
-
-#endif /* __STL_HAS_WCHAR_T */
 
 __STL_TEMPLATE_NULL struct _Is_integer<short> {
   typedef __true_type _Integral;

@@ -301,14 +301,6 @@ class numeric_limits<unsigned char>
   : public _Integer_limits<unsigned char, 0, UCHAR_MAX>
 {};
 
-#ifdef __STL_HAS_WCHAR_T
-
-__STL_TEMPLATE_NULL
-class numeric_limits<wchar_t>
-  : public _Integer_limits<wchar_t, INT_MIN, INT_MAX>
-{};
-
-#endif
 
 __STL_TEMPLATE_NULL
 class numeric_limits<short>

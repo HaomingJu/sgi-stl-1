@@ -88,9 +88,6 @@ inline void _Destroy(int*, int*) {}
 inline void _Destroy(long*, long*) {}
 inline void _Destroy(float*, float*) {}
 inline void _Destroy(double*, double*) {}
-#ifdef __STL_HAS_WCHAR_T
-inline void _Destroy(wchar_t*, wchar_t*) {}
-#endif /* __STL_HAS_WCHAR_T */
 
 // --------------------------------------------------
 // Old names from the HP STL.
