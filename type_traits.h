@@ -91,7 +91,6 @@ struct __type_traits {
 //  have built-in __types_traits support, and essential for compilers
 //  that don't.
 
-#ifndef __STL_NO_BOOL
 
 __STL_TEMPLATE_NULL struct __type_traits<bool> {
    typedef __true_type    has_trivial_default_constructor;
@@ -101,7 +100,6 @@ __STL_TEMPLATE_NULL struct __type_traits<bool> {
    typedef __true_type    is_POD_type;
 };
 
-#endif /* __STL_NO_BOOL */
 
 __STL_TEMPLATE_NULL struct __type_traits<char> {
    typedef __true_type    has_trivial_default_constructor;
@@ -302,13 +300,11 @@ template <class _Tp> struct _Is_integer {
   typedef __false_type _Integral;
 };
 
-#ifndef __STL_NO_BOOL
 
 __STL_TEMPLATE_NULL struct _Is_integer<bool> {
   typedef __true_type _Integral;
 };
 
-#endif /* __STL_NO_BOOL */
 
 __STL_TEMPLATE_NULL struct _Is_integer<char> {
   typedef __true_type _Integral;

@@ -11,11 +11,6 @@
 #     define __STL_UITHREADS
 # endif
 
-
-
-
-
-
 #   define __STL_DEFAULT_CONSTRUCTOR_BUG
 #   ifdef __EXCEPTIONS
 #   endif
@@ -89,11 +84,6 @@
 #   endif
 # endif
 
-# if defined(__STL_NO_BOOL) && !defined(__STL_DONT_USE_BOOL_TYPEDEF)
-    typedef int bool;
-#   define true 1
-#   define false 0
-# endif
 
 # ifdef __STL_NEED_TYPENAME
 #   define typename
@@ -135,7 +125,6 @@
 # if defined(__STL_CLASS_PARTIAL_SPECIALIZATION) && \
      defined(__STL_MEMBER_TEMPLATES) && \
      defined(__STL_MEMBER_TEMPLATE_CLASSES) && \
-    !defined(__STL_NO_BOOL) && \
     !defined(__STL_NON_TYPE_TMPL_PARAM_BUG) && \
     !defined(__STL_LIMITED_DEFAULT_TEMPLATES) && \
     !defined(__STL_USE_SGI_ALLOCATORS) 

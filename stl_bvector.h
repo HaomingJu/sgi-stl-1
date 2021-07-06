@@ -349,7 +349,7 @@ protected:
 //  compiler support.  Otherwise, we define a class bit_vector which uses
 //  the default allocator. 
 
-#if defined(__STL_CLASS_PARTIAL_SPECIALIZATION) && !defined(__STL_NO_BOOL)
+#if defined(__STL_CLASS_PARTIAL_SPECIALIZATION) 
 #  define __SGI_STL_VECBOOL_TEMPLATE
 #  define __BVECTOR           vector<bool, _Alloc>
 #  define __VECTOR            vector

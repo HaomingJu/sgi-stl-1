@@ -279,14 +279,12 @@ class numeric_limits : public _Numeric_limits_base<_Tp> {};
 
 // Specializations for all built-in integral types.
 
-#ifndef __STL_NO_BOOL
 
 __STL_TEMPLATE_NULL
 class numeric_limits<bool>
   : public _Integer_limits<bool, false, true, 1, false>
 {};
 
-#endif /* __STL_NO_BOOL */
 
 __STL_TEMPLATE_NULL
 class numeric_limits<char>
