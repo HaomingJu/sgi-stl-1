@@ -382,20 +382,14 @@ private:                        // Helper functions used by constructors
                                 // and elsewhere.
   void _M_construct_null(_CharT* __p) {
     construct(__p);
-#   ifdef __STL_DEFAULT_CONSTRUCTOR_BUG
     __STL_TRY {
       *__p = (_CharT) 0;
     }
     __STL_UNWIND(destroy(__p));
-#   endif
   }
 
   static _CharT _M_null() {
-#   ifndef __STL_DEFAULT_CONSTRUCTOR_BUG
-    return _CharT();
-#   else
     return (_CharT) 0;
-#   endif
   }
 
 private:                        

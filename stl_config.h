@@ -11,7 +11,6 @@
 #     define __STL_UITHREADS
 # endif
 
-#   define __STL_DEFAULT_CONSTRUCTOR_BUG
 #   ifdef __EXCEPTIONS
 #   endif
 #   ifdef _REENTRANT
