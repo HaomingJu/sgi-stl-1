@@ -753,11 +753,7 @@ struct _Rope_RopeSubstring : public _Rope_RopeFunction<_CharT,_Alloc>,
     _Rope_RopeRep<_CharT,_Alloc>* _M_ptr;
     ~_Rope_self_destruct_ptr() 
       { _Rope_RopeRep<_CharT,_Alloc>::_S_unref(_M_ptr); }
-#   ifdef __STL_USE_EXCEPTIONS
         _Rope_self_destruct_ptr() : _M_ptr(0) {};
-#   else
-        _Rope_self_destruct_ptr() {};
-#   endif
     _Rope_self_destruct_ptr(_Rope_RopeRep<_CharT,_Alloc>* __p) : _M_ptr(__p) {}
     _Rope_RopeRep<_CharT,_Alloc>& operator*() { return *_M_ptr; }
     _Rope_RopeRep<_CharT,_Alloc>* operator->() { return _M_ptr; }

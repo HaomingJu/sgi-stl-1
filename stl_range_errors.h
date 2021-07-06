@@ -25,7 +25,6 @@
 #include <stl_config.h>
 
 #if defined(__STL_CAN_THROW_RANGE_ERRORS) && \
-    defined(__STL_USE_EXCEPTIONS) && \
     !defined(__STL_DONT_THROW_RANGE_ERRORS)
 # define __STL_THROW_RANGE_ERRORS
 #endif

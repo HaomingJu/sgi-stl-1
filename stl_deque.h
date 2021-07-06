@@ -1521,13 +1521,11 @@ void deque<_Tp,_Alloc>::_M_new_elements_at_front(size_type __new_elems)
     for (__i = 1; __i <= __new_nodes; ++__i)
       *(_M_start._M_node - __i) = _M_allocate_node();
   }
-#       ifdef __STL_USE_EXCEPTIONS
   catch(...) {
     for (size_type __j = 1; __j < __i; ++__j)
       _M_deallocate_node(*(_M_start._M_node - __j));      
     throw;
   }
-#       endif /* __STL_USE_EXCEPTIONS */
 }
 
 template <class _Tp, class _Alloc>
@@ -1541,13 +1539,11 @@ void deque<_Tp,_Alloc>::_M_new_elements_at_back(size_type __new_elems)
     for (__i = 1; __i <= __new_nodes; ++__i)
       *(_M_finish._M_node + __i) = _M_allocate_node();
   }
-#       ifdef __STL_USE_EXCEPTIONS
   catch(...) {
     for (size_type __j = 1; __j < __i; ++__j)
       _M_deallocate_node(*(_M_finish._M_node + __j));      
     throw;
   }
-#       endif /* __STL_USE_EXCEPTIONS */
 }
 
 template <class _Tp, class _Alloc>

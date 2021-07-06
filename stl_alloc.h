@@ -39,7 +39,7 @@
 // not larger arenas as with the original STL allocators.
 
 #ifndef __THROW_BAD_ALLOC
-#  if defined(__STL_NO_BAD_ALLOC) || !defined(__STL_USE_EXCEPTIONS)
+#  if defined(__STL_NO_BAD_ALLOC) 
 #    include <stdio.h>
 #    include <stdlib.h>
 #    define __THROW_BAD_ALLOC fprintf(stderr, "out of memory\n"); exit(1)

@@ -23,9 +23,7 @@
 # include <iostream.h>
 #endif /* __STL_USE_NEW_IOSTREAMS */
 
-#ifdef __STL_USE_EXCEPTIONS
 # include <stdexcept>
-#endif
 
 __STL_BEGIN_NAMESPACE
 
@@ -1131,7 +1129,7 @@ rope<_CharT,_Alloc>::_S_balance(_RopeRep* __r)
 #	endif
 	  __result = _S_concat(__forest[__i], __result);
 	__forest[__i]->_M_unref_nonnil();
-#	if !defined(__GC) && defined(__STL_USE_EXCEPTIONS)
+#	if !defined(__GC) 
 	  __forest[__i] = 0;
 #	endif
       }
@@ -1139,11 +1137,7 @@ rope<_CharT,_Alloc>::_S_balance(_RopeRep* __r)
     __STL_UNWIND(for(__i = 0; __i <= _RopeRep::_S_max_rope_depth; __i++)
 		 _S_unref(__forest[__i]))
     if (__result->_M_depth > _RopeRep::_S_max_rope_depth) {
-#     ifdef __STL_USE_EXCEPTIONS
 	__STL_THROW(length_error("rope too long"));
-#     else
-	abort();
-#     endif
     }
     return(__result);
 }

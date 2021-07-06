@@ -950,7 +950,6 @@ void hashtable<_Val,_Key,_HF,_Ex,_Eq,_All>
         }
         _M_buckets.swap(__tmp);
       }
-#         ifdef __STL_USE_EXCEPTIONS
       catch(...) {
         for (size_type __bucket = 0; __bucket < __tmp.size(); ++__bucket) {
           while (__tmp[__bucket]) {
@@ -961,7 +960,6 @@ void hashtable<_Val,_Key,_HF,_Ex,_Eq,_All>
         }
         throw;
       }
-#         endif /* __STL_USE_EXCEPTIONS */
     }
   }
 }

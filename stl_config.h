@@ -167,7 +167,6 @@
 #     define __STL_FUNCTION_TMPL_PARTIAL_ORDER
 #     define __STL_MEMBER_TEMPLATES
 #     define __STL_MEMBER_TEMPLATE_CLASSES
-#     define __STL_USE_EXCEPTIONS
 #     define __STL_HAS_NAMESPACES
 #     define __STL_USE_NAMESPACES
 #     define __STL_LONG_LONG
@@ -185,7 +184,6 @@
 
 #   define __STL_DEFAULT_CONSTRUCTOR_BUG
 #   ifdef __EXCEPTIONS
-#     define __STL_USE_EXCEPTIONS
 #   endif
 #   ifdef _REENTRANT
 #     define __STL_PTHREADS
@@ -195,7 +193,6 @@
 #   define __STL_NO_BOOL
 #   define __STL_NEED_TYPENAME
 #   define __STL_NEED_EXPLICIT
-#   define __STL_USE_EXCEPTIONS
 #   ifdef _REENTRANT
 #     define __STL_PTHREADS
 #   endif
@@ -210,7 +207,6 @@
 #   define __STL_MEMBER_TEMPLATE_CLASSES
 #   define __STL_TEMPLATE_FRIENDS
 #   define __STL_CLASS_PARTIAL_SPECIALIZATION
-#   define __STL_USE_EXCEPTIONS
 #   define __STL_HAS_NAMESPACES
 # endif
 
@@ -224,10 +220,8 @@
 #   define __STL_CLASS_PARTIAL_SPECIALIZATION
 #   define __STL_NO_DRAND48
 #   define __STL_HAS_NAMESPACES
-#   define __STL_USE_EXCEPTIONS
 #   define __STL_MEMBER_TEMPLATE_KEYWORD
 #   ifdef _CPPUNWIND
-#     define __STL_USE_EXCEPTIONS
 #   endif
 #   ifdef _MT
 #     define __STL_WIN32THREADS
@@ -249,7 +243,6 @@
 
 
 
-// Microsoft compiler.
 
 # if defined(__BORLANDC__)
 #     define __STL_NO_BAD_ALLOC
@@ -268,7 +261,6 @@
 #     define __STL_NON_TYPE_TMPL_PARAM_BUG
 #   endif
 #   ifdef _CPPUNWIND
-#     define __STL_USE_EXCEPTIONS
 #   endif
 #   ifdef __MT__
 #     define __STL_WIN32THREADS
@@ -381,21 +373,12 @@
 #   define __STD_QUALIFIER
 # endif
 
-# ifdef __STL_USE_EXCEPTIONS
 #   define __STL_TRY try
 #   define __STL_CATCH_ALL catch(...)
 #   define __STL_THROW(x) throw x
 #   define __STL_RETHROW throw
 #   define __STL_NOTHROW throw()
 #   define __STL_UNWIND(action) catch(...) { action; throw; }
-# else
-#   define __STL_TRY 
-#   define __STL_CATCH_ALL if (false)
-#   define __STL_THROW(x) 
-#   define __STL_RETHROW 
-#   define __STL_NOTHROW 
-#   define __STL_UNWIND(action) 
-# endif
 
 #ifdef __STL_ASSERTIONS
 # include <stdio.h>
