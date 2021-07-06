@@ -250,52 +250,6 @@
 
 
 // Microsoft compiler.
-# if defined(_MSC_VER) && !defined(__ICL) && !defined(__MWERKS__)
-#   define __STL_NO_DRAND48
-#   define __STL_STATIC_CONST_INIT_BUG
-#   define __STL_NEED_TYPENAME
-#   define __STL_NO_USING_CLAUSE_IN_CLASS
-#   define __STL_NO_FRIEND_TEMPLATE_CLASS
-#   if _MSC_VER < 1100  /* 1000 is version 4.0, 1100 is 5.0, 1200 is 6.0. */
-#     define __STL_NEED_EXPLICIT
-#     define __STL_NO_BOOL
-#     define __STL_NO_BAD_ALLOC
-#   endif
-#   if _MSC_VER > 1000
-#     include <yvals.h>
-#     define __STL_DONT_USE_BOOL_TYPEDEF
-#   endif
-#   define __STL_NON_TYPE_TMPL_PARAM_BUG
-#   define __SGI_STL_NO_ARROW_OPERATOR
-#   define __STL_DEFAULT_CONSTRUCTOR_BUG
-#   ifdef _CPPUNWIND
-#     define __STL_USE_EXCEPTIONS
-#   endif
-#   ifdef _MT
-#     define __STL_WIN32THREADS
-#   endif
-#   if _MSC_VER >= 1200
-#     define __STL_PARTIAL_SPECIALIZATION_SYNTAX
-#     define __STL_HAS_NAMESPACES
-#     define __STL_CAN_THROW_RANGE_ERRORS
-#     define NOMINMAX
-#     undef min
-#     undef max
-// disable warning 'initializers put in unrecognized initialization area'
-#     pragma warning ( disable : 4075 )
-// disable warning 'empty controlled statement found'
-#     pragma warning ( disable : 4390 )
-// disable warning 'debug symbol greater than 255 chars'
-#     pragma warning ( disable : 4786 )
-#   endif
-#   if _MSC_VER < 1100
-#     define __STL_NO_EXCEPTION_HEADER
-#     define __STL_NO_BAD_ALLOC
-#   endif
-    // Because of a Microsoft front end bug, we must not provide a
-    // namespace qualifier when declaring a friend function.
-#   define __STD_QUALIFIER
-# endif
 
 # if defined(__BORLANDC__)
 #     define __STL_NO_BAD_ALLOC
