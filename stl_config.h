@@ -189,18 +189,6 @@
 #     define __STL_PTHREADS
 #   endif
 
-# if defined(__SUNPRO_CC) 
-#   define __STL_NO_BOOL
-#   define __STL_NEED_TYPENAME
-#   define __STL_NEED_EXPLICIT
-#   ifdef _REENTRANT
-#     define __STL_PTHREADS
-#   endif
-#   define __SGI_STL_NO_ARROW_OPERATOR
-#   define __STL_PARTIAL_SPECIALIZATION_SYNTAX
-#   define __STL_NO_EXCEPTION_HEADER
-#   define __STL_NO_BAD_ALLOC
-# endif
 
 # if defined(__COMO__)
 #   define __STL_MEMBER_TEMPLATES

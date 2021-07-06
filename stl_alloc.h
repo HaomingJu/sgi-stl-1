@@ -18,13 +18,7 @@
 #ifndef __SGI_STL_INTERNAL_ALLOC_H
 #define __SGI_STL_INTERNAL_ALLOC_H
 
-#ifdef __SUNPRO_CC
-#  define __PRIVATE public
-   // Extra access restrictions prevent us from really making some things
-   // private.
-#else
 #  define __PRIVATE private
-#endif
 
 #ifdef __STL_STATIC_TEMPLATE_MEMBER_BUG
 #  define __USE_MALLOC
