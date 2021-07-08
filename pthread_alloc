@@ -30,9 +30,6 @@
 #include <errno.h>
 #include <stl_config.h>
 #include <stl_alloc.h>
-#ifndef __RESTRICT
-#  define __RESTRICT
-#endif
 
 #ifndef __STL_NO_BAD_ALLOC
 #  include <new>
@@ -129,7 +126,7 @@ public:
   static void * allocate(size_t __n)
   {
     __obj * volatile * __my_free_list;
-    __obj * __RESTRICT __result;
+    __obj * __result;
     _Pthread_alloc_per_thread_state<_Max_size>* __a;
 
     if (__n > _Max_size) {

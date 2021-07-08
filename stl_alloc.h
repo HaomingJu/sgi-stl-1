@@ -25,65 +25,17 @@
 // The allocation primitives are intended to allocate individual objects,
 // not larger arenas as with the original STL allocators.
 
-#ifndef __THROW_BAD_ALLOC
-#if defined(__STL_NO_BAD_ALLOC)
-#include <stdio.h>
-#include <stdlib.h>
-#define __THROW_BAD_ALLOC             \
-  fprintf(stderr, "out of memory\n"); \
-  exit(1)
-#else /* Standard conforming out-of-memory handling */
-#include <new>
 #define __THROW_BAD_ALLOC throw std::bad_alloc()
-#endif
-#endif
 
 #include <assert.h>
 #include <stddef.h>
 #include <stdlib.h>
 #include <string.h>
-#ifndef __RESTRICT
-#define __RESTRICT
-#endif
 
-#ifdef __STL_THREADS
-#include <stl_threads.h>
-#define __NODE_ALLOCATOR_THREADS true
-#ifdef __STL_SGI_THREADS
-// We test whether threads are in use before locking.
-// Perhaps this should be moved into stl_threads.h, but that
-// probably makes it harder to avoid the procedure call when
-// it isn't needed.
-extern "C" {
-extern int __us_rsthread_malloc;
-}
-// The above is copied from malloc.h.  Including <malloc.h>
-// would be cleaner but fails with certain levels of standard
-// conformance.
-#define __NODE_ALLOCATOR_LOCK                 \
-  if (threads && __us_rsthread_malloc) {      \
-    _S_node_allocator_lock._M_acquire_lock(); \
-  }
-#define __NODE_ALLOCATOR_UNLOCK               \
-  if (threads && __us_rsthread_malloc) {      \
-    _S_node_allocator_lock._M_release_lock(); \
-  }
-#else /* !__STL_SGI_THREADS */
-#define __NODE_ALLOCATOR_LOCK                              \
-  {                                                        \
-    if (threads) _S_node_allocator_lock._M_acquire_lock(); \
-  }
-#define __NODE_ALLOCATOR_UNLOCK                            \
-  {                                                        \
-    if (threads) _S_node_allocator_lock._M_release_lock(); \
-  }
-#endif
-#else
 //  Thread-unsafe
 #define __NODE_ALLOCATOR_LOCK
 #define __NODE_ALLOCATOR_UNLOCK
 #define __NODE_ALLOCATOR_THREADS false
-#endif
 
 __STL_BEGIN_NAMESPACE
 
@@ -272,9 +224,6 @@ class __default_alloc_template {
   static char* _S_end_free;
   static size_t _S_heap_size;
 
-#ifdef __STL_THREADS
-  static _STL_mutex_lock _S_node_allocator_lock;
-#endif
 
   // It would be nice to use _STL_auto_lock here.  But we
   // don't need the NULL check.  And we do need a test whether
@@ -303,7 +252,7 @@ class __default_alloc_template {
       /*REFERENCED*/
       _Lock __lock_instance;
 #endif
-      _Obj* __RESTRICT __result = *__my_free_list;
+      _Obj* __result = *__my_free_list;
       if (__result == 0)
         __ret = _S_refill(_S_round_up(__n));
       else {
@@ -463,10 +412,6 @@ void* __default_alloc_template<threads, inst>::reallocate(void* __p, size_t __ol
   return (__result);
 }
 
-#ifdef __STL_THREADS
-template <bool __threads, int __inst>
-_STL_mutex_lock __default_alloc_template<__threads, __inst>::_S_node_allocator_lock __STL_MUTEX_INITIALIZER;
-#endif
 
 template <bool __threads, int __inst>
 char* __default_alloc_template<__threads, __inst>::_S_start_free = 0;
