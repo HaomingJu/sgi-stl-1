@@ -1,4 +1,4 @@
-/*
+————/*
  * Copyright (c) 1996-1997
  * Silicon Graphics Computer Systems, Inc.
  *
@@ -74,6 +74,7 @@ class __malloc_alloc_template {
 
 // malloc_alloc out-of-memory handling
 
+/* 静态函数指针 */
 template <int __inst>
 void (*__malloc_alloc_template<__inst>::__malloc_alloc_oom_handler)() = 0;
 
@@ -135,6 +136,7 @@ class debug_alloc {
   };  // Size of space used to store size.  Note
       // that this must be large enough to preserve
       // alignment.
+      // sizeof(size_t) == 8 == _S_extra;
 
  public:
   static void* allocate(size_t __n) {
@@ -193,13 +195,11 @@ typedef malloc_alloc single_client_alloc;
 // breaks if we make these template class members:
 enum { _ALIGN = 8 };
 enum { _MAX_BYTES = 128 };
-enum { _NFREELISTS = 16 };  // _MAX_BYTES/_ALIGN
+enum { _NFREELISTS = 16 };  // _MAX_BYTES/_ALIGN // number of free lists
 
 template <bool threads, int inst>
 class __default_alloc_template {
  private:
-  // Really we should use static const int x = N
-  // instead of enum { x = N }, but few compilers accept the former.
   static size_t _S_round_up(size_t __bytes) { return (((__bytes) + (size_t)_ALIGN - 1) & ~((size_t)_ALIGN - 1)); }
 
  private:
@@ -209,10 +209,8 @@ class __default_alloc_template {
   };
 
  private:
-  static _Obj* __STL_VOLATILE _S_free_list[];
-  // Specifying a size results in duplicate def for 4.1
+  static _Obj* _S_free_list[];
   static size_t _S_freelist_index(size_t __bytes) { return (((__bytes) + (size_t)_ALIGN - 1) / (size_t)_ALIGN - 1); }
-
   // Returns an object of size __n, and optionally adds to size __n free list.
   static void* _S_refill(size_t __n);
   // Allocates a chunk for nobjs of size size.  nobjs may be reduced
@@ -223,7 +221,6 @@ class __default_alloc_template {
   static char* _S_start_free;
   static char* _S_end_free;
   static size_t _S_heap_size;
-
 
   // It would be nice to use _STL_auto_lock here.  But we
   // don't need the NULL check.  And we do need a test whether
@@ -244,14 +241,7 @@ class __default_alloc_template {
     if (__n > (size_t)_MAX_BYTES) {
       __ret = malloc_alloc::allocate(__n);
     } else {
-      _Obj* __STL_VOLATILE* __my_free_list = _S_free_list + _S_freelist_index(__n);
-      // Acquire the lock here with a constructor call.
-      // This ensures that it is released in exit or during stack
-      // unwinding.
-#ifndef _NOTHREADS
-      /*REFERENCED*/
-      _Lock __lock_instance;
-#endif
+      _Obj** __my_free_list = _S_free_list + _S_freelist_index(__n);
       _Obj* __result = *__my_free_list;
       if (__result == 0)
         __ret = _S_refill(_S_round_up(__n));
@@ -269,14 +259,10 @@ class __default_alloc_template {
     if (__n > (size_t)_MAX_BYTES)
       malloc_alloc::deallocate(__p, __n);
     else {
-      _Obj* __STL_VOLATILE* __my_free_list = _S_free_list + _S_freelist_index(__n);
+      _Obj** __my_free_list = _S_free_list + _S_freelist_index(__n);
       _Obj* __q = (_Obj*)__p;
 
       // acquire lock
-#ifndef _NOTHREADS
-      /*REFERENCED*/
-      _Lock __lock_instance;
-#endif /* _NOTHREADS */
       __q->_M_free_list_link = *__my_free_list;
       *__my_free_list = __q;
       // lock is released here
@@ -327,7 +313,7 @@ char* __default_alloc_template<__threads, __inst>::_S_chunk_alloc(size_t __size,
     size_t __bytes_to_get = 2 * __total_bytes + _S_round_up(_S_heap_size >> 4);
     // Try to make use of the left-over piece.
     if (__bytes_left > 0) {
-      _Obj* __STL_VOLATILE* __my_free_list = _S_free_list + _S_freelist_index(__bytes_left);
+      _Obj** __my_free_list = _S_free_list + _S_freelist_index(__bytes_left);
 
       ((_Obj*)_S_start_free)->_M_free_list_link = *__my_free_list;
       *__my_free_list = (_Obj*)_S_start_free;
@@ -335,7 +321,7 @@ char* __default_alloc_template<__threads, __inst>::_S_chunk_alloc(size_t __size,
     _S_start_free = (char*)malloc(__bytes_to_get);
     if (0 == _S_start_free) {
       size_t __i;
-      _Obj* __STL_VOLATILE* __my_free_list;
+      _Obj** __my_free_list;
       _Obj* __p;
       // Try to make do with what we have.  That can't
       // hurt.  We do not try smaller requests, since that tends
@@ -371,7 +357,7 @@ template <bool __threads, int __inst>
 void* __default_alloc_template<__threads, __inst>::_S_refill(size_t __n) {
   int __nobjs = 20;
   char* __chunk = _S_chunk_alloc(__n, __nobjs);
-  _Obj* __STL_VOLATILE* __my_free_list;
+  _Obj** __my_free_list;
   _Obj* __result;
   _Obj* __current_obj;
   _Obj* __next_obj;
@@ -412,7 +398,6 @@ void* __default_alloc_template<threads, inst>::reallocate(void* __p, size_t __ol
   return (__result);
 }
 
-
 template <bool __threads, int __inst>
 char* __default_alloc_template<__threads, __inst>::_S_start_free = 0;
 
@@ -423,7 +408,7 @@ template <bool __threads, int __inst>
 size_t __default_alloc_template<__threads, __inst>::_S_heap_size = 0;
 
 template <bool __threads, int __inst>
-typename __default_alloc_template<__threads, __inst>::_Obj* __STL_VOLATILE
+typename __default_alloc_template<__threads, __inst>::_Obj*
     __default_alloc_template<__threads, __inst>::_S_free_list[_NFREELISTS] = {
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 };

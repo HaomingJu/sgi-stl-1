@@ -3,13 +3,7 @@
 #define __STL_CONFIG_H
 
 
-# if defined(_PTHREADS) && !defined(_NOTHREADS)
-#     define __STL_PTHREADS
-# endif
 
-# if defined(_UITHREADS) && !defined(_PTHREADS) && !defined(_NOTHREADS)
-#     define __STL_UITHREADS
-# endif
 
 #   ifdef __EXCEPTIONS
 #   endif
